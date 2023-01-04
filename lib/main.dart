@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:uml_project/pages/login_page.dart';
-import 'package:uml_project/pages/splash_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:uml_project/pages/auth_page.dart';
+import 'firebase_options.dart';
 
-
-
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'uml_projet',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SplashView(),
+      home: AuthPage(),
     );
   }
 }
